@@ -4,3 +4,10 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+logs
+.buildpath
+.project
+.settings
+.idea
+.DS_Store
+
