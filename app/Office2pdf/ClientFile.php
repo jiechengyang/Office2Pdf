@@ -9,6 +9,8 @@
 namespace officeUpload;
 
 $config = [
+    'debug' => true,
+    'ROOT_PATH' => str_replace('\\','/',dirname(__FILE__)),
     'server_protocol'    => 'tcp',
     'server_host'        => '127.0.0.1',//本地没有则填其它
     'server_port'        => '12508',
