@@ -8,7 +8,24 @@
  */
 namespace officeUpload;
 
-$config = require_once str_replace('\\', '/', __DIR__) . '/config.php';
+$config = [
+    'server_protocol'    => 'tcp',
+    'server_host'        => '127.0.0.1',//本地没有则填其它
+    'server_port'        => '12508',
+    'blocking_mode'      => 1,//是否连接阻塞
+    'default_chunk_size' => 1024 * 1024,
+    'stream_timeout'     => 30,
+    'app_key'            => 'j9NxSY1SR61Asu@j1',//可以更换
+    'transfer_state'     => [
+        'ready',       // 开始
+        'processing', // 传输中
+        'succeess',  // 传输完成
+        'timeout',  // 传输超时
+        'failed',  // 传输失败
+        'pausing',  // 传输暂停
+        'goahead', //续传
+    ],
+];
 if ($config['debug']) {
 	error_reporting(E_ALL);
 	ini_set("display_errors", "On");
