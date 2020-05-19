@@ -24,6 +24,11 @@ if (DEBUG) {
 }
 
 require_once CORE_PATH . '/Autoloader.php';
+if (is_file($class_file)) {
+    require_once($class_file);
+} else {
+	exit (' No such as file' . "\r\n");
+}
 
 $worker = new Worker('tcp://' . TCP_HOST . ':' . TCP_PORT);
 // $worker->count 	= 1;
