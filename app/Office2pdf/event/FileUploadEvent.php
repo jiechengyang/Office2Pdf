@@ -14,10 +14,6 @@ use Workerman\MySQL\Connection as MysqlConnection;
 use Office2pdf\helpers\Color;
 use Office2pdf\helpers\OfficeConversion;
 use Office2pdf\timer\HeartbeatPacket;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
-use PhpOffice\PhpSpreadsheet\Writer\Xls as XlsWriter;
-use PhpOffice\PhpSpreadsheet\Reader\Xls as XlsReader;
 
 class FileUploadEvent
 {
