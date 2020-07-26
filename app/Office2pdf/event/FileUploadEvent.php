@@ -7,11 +7,17 @@
  */
 namespace Office2pdf\event;
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Workerman\Lib\Timer;
 use Workerman\MySQL\Connection as MysqlConnection;
 use Office2pdf\helpers\Color;
 use Office2pdf\helpers\OfficeConversion;
 use Office2pdf\timer\HeartbeatPacket;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Writer\Xls as XlsWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xls as XlsReader;
 
 class FileUploadEvent
 {
@@ -259,6 +265,10 @@ class FileUploadEvent
 				mkdir(WEB_UPLOAD_PATH, 0777, true);
 			}
 
+			if ($ext === 'xlsx') {
+			    // 如果是xlsx则转成xls
+			    $file = $this->xlsxToXls($file);
+            }
 			if (self::isWinOs()) {
 				exec("chcp 65001");
 				$office2pdf = new OfficeConversion();
@@ -291,6 +301,21 @@ class FileUploadEvent
 		// @unlink($file);
 		return false;
 	}
+
+	private function xlsxToXls($inputFile, $outputFile = null)
+    {
+        $objReader = IOFactory::createReader('Xlsx');
+        $objPHPExcel = $objReader->load($inputFile);
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Xls');
+        if ($outputFile !== null) {
+            $objWriter->save($outputFile);
+            return $outputFile;
+        }
+
+        unlink($inputFile);
+        $filename = str_replace('.xlsx', '.xls',$inputFile);
+        $objWriter->save($filename);
+    }
 
 	private function insertData($file_id, $app_key, $file_name, $pdf_path)
 	{

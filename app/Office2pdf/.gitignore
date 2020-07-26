@@ -4,4 +4,7 @@ logs
 .settings
 .idea
 .DS_Store
-vendor
+uploads
+config-local.php
+
+
