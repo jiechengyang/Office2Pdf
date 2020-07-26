@@ -8,7 +8,6 @@
 namespace Office2pdf\event;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Workerman\Lib\Timer;
 use Workerman\MySQL\Connection as MysqlConnection;
 use Office2pdf\helpers\Color;
@@ -311,6 +310,7 @@ class FileUploadEvent
         unlink($inputFile);
         $filename = str_replace('.xlsx', '.xls',$inputFile);
         $objWriter->save($filename);
+        return $filename;
     }
 
 	private function insertData($file_id, $app_key, $file_name, $pdf_path)
