@@ -214,7 +214,7 @@ class FileUploadEvent
 	{
 		switch ($type) {
 			case 'Custom':
-				Color::show($msg . ' [' . $type . ']');
+				Color::show($msg . ' [' . $type . ']\r');
 				break;
 			case 'showInfo':
 				Color::showInfo($msg . ' [' . $type . ']');
